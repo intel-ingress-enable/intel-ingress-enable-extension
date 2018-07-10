@@ -115,12 +115,16 @@ function initialize(tabId) {
     setTabActive(activeIITCTab);
   } else {
     /* Example */
-    const activePluginList = [
+    const enabledPluginList = [
       './plugins/player-tracker.user.js'
     ];
-    console.log(activePluginList, pluginlist)
+
+    const activePluginList = pluginlist.filter(function(item) {
+      return enabledPluginList.includes(item);
+    })
+    
     /* Example end */
-    loadPlugins(tabId, pluginlist);
+    loadPlugins(tabId, activePluginList);
 
     chrome.tabs.executeScript(tabId, {
       runAt: "document_start",
